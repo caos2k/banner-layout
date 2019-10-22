@@ -1,0 +1,26 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: lightcoral;
+}
+
+.container{
+    position: absolute;
+    height:auto;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: lightblue;
+    display: block;
+    margin: 10px;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: 50px;
+}
+
+.grid-item{
+    border: 1px solid black;
+}
