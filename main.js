@@ -25,6 +25,8 @@ document.addEventListener("DOMContentLoaded", function(e){
 
 		bannerArray[i].querySelector(".banner").style.width = width + "px";
 		bannerArray[i].querySelector(".banner").style.height = height + "px";
+		bannerArray[i].querySelector(".banner").innerHTML =
+			'<div class="view"><div class="plane main"><div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div></div></div>';
 
 		bannerArray[i].querySelector(".wrapper").style.width = width + "px";
 		bannerArray[i].querySelector(".wrapper").style.height = height + 50 + "px";
