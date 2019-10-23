@@ -1,7 +1,6 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: lightcoral;
 }
 
 .container{
@@ -18,12 +17,12 @@ body {
 }
 
 .grid{
-    /*display: grid;*/
     position: absolute;
 }
 
 .grid-item{
     position: relative;
+    float: left;
     display: inline-block;
 }
 
@@ -32,12 +31,28 @@ body {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    background: red;
 }
 
 .banner{
     position: relative;
-    background-color: black;
-    color: white;
+    border: 1px solid black;
+    box-sizing: border-box;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .infoBox{
@@ -47,14 +62,7 @@ body {
     bottom: 0;
     background-color: white;
     text-align: center;
-    /*left: 50%;*/
-    /*transform: translateX(-50%);*/
 }
-
-
-
-
-
 
 .red{
     background-color: lightsalmon;
@@ -82,100 +90,4 @@ body {
 
 .sea{
     background-color: lightseagreen;
-}
-
-.w160{
-    width: 160px;
-}
-
-.w200{
-    width: 200px;
-}
-
-.w300{
-    width: 300px;
-}
-
-.w320{
-    width: 320px;
-}
-
-.w350{
-    width: 350px;
-}
-
-.w480{
-    width: 480px;
-}
-
-.w500{
-    width: 500px;
-}
-
-.w728{
-    width: 728px;
-}
-
-.w750{
-    width: 750px;
-}
-
-.w970{
-    width: 970px;
-}
-
-.w1000{
-    width: 1000px;
-}
-
-.w1200{
-    width: 1200px;
-}
-
-.w1250{
-    width: 1250px;
-}
-
-.h50{
-    height: 50px;
-}
-
-.h90{
-    height: 90px;
-}
-
-.h100{
-    height: 100px;
-}
-
-.h150{
-    height: 150px;
-}
-
-.h250{
-    height: 250px;
-}
-
-.h300{
-    height: 300px;
-}
-
-.h320{
-    height: 320px;
-}
-
-.h350{
-    height: 350px;
-}
-
-.h480{
-    height: 480px;
-}
-
-.h600{
-    height: 600px;
-}
-
-.h650{
-    height: 650px;
 }
