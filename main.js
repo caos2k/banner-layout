@@ -34,7 +34,12 @@ document.addEventListener("DOMContentLoaded", function(e){
 	}
 
 	var msnry = new Masonry( '.grid', {
-		// options
+		columnWidth: 50,
+		itemSelector: '.grid-item',
+		horizontalOrder: false,
+		gutter: 0,
+		// fitWidth: true
 	});
 	console.log("masonry: ", msnry);
+
 });
