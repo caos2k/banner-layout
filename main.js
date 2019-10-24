@@ -1,14 +1,11 @@
 document.addEventListener("DOMContentLoaded", function(e){
 
 	var bannerArray = document.querySelectorAll(".grid-item");
-	var colorsArray = ["red", "blue", "lightblue", "cyan", "teal", "green", "lightgreen", "lime", "yellow", "amber", "orange", "pink", "purple", "indigo", "brown"];
+	// var colorsArray = ["red", "blue", "lightblue", "cyan", "teal", "green", "lightgreen", "lime", "yellow", "amber", "orange", "pink", "purple", "indigo", "brown"];
 
 	var areasArray = [];
 
 	for (var i = 0; i < bannerArray.length; i++){
-		var randomPosition = Math.floor(Math.random() * colorsArray.length);
-		var randomColor = colorsArray[randomPosition];
-		// colorsArray.splice(randomPosition, 1);
 		var sizeText = bannerArray[i].querySelector(".infoBox").innerHTML;
 		var width = Number(sizeText.split("x")[0]);
 		var height = Number(sizeText.split("x")[1]);
@@ -22,13 +19,17 @@ document.addEventListener("DOMContentLoaded", function(e){
 		bannerArray[i].querySelector(".infoBox").style.width = closest50Width + 50 + "px";
 		bannerArray[i].style.width = closest50Width + 50 + "px";
 		bannerArray[i].style.height = closest50Height + 100 + "px";
-		// bannerArray[i].classList.add("white");
+
+		// var randomPosition = Math.floor(Math.random() * colorsArray.length);
+		// var randomColor = colorsArray[randomPosition];
+		// colorsArray.splice(randomPosition, 1);
+	 	// bannerArray[i].classList.add("white");
 		// bannerArray[i].classList.add(randomColor);
 
 		var horizontalBlocks = bannerArray[i].offsetWidth / 50;
 		var verticalBlocks = bannerArray[i].offsetHeight / 50;
 		var area = horizontalBlocks * verticalBlocks;
-		bannerArray[i].querySelector(".infoBox").innerHTML = "<strong>" + sizeText + "</strong>"
+		bannerArray[i].querySelector(".infoBox").innerHTML = "<strong>" + sizeText + "</strong> (" + area + " blocks)";
 			// + "<br/><strong>Blocks:</strong> " + horizontalBlocks + "x" + verticalBlocks + " &#10687; <strong>Area:</strong> " + area;
 
 		var object = {
@@ -44,7 +45,9 @@ document.addEventListener("DOMContentLoaded", function(e){
 			? 0
 			: (a.area > b.area ? 1 : -1);
 	});
-	console.log(areasArray);
+
+	document.querySelector(".grid").innerHTML = "";
+
 	for (i = 0; i < areasArray.length; ++i) {
 		document.querySelector(".grid").appendChild(areasArray[i].element);
 	}
@@ -53,8 +56,7 @@ document.addEventListener("DOMContentLoaded", function(e){
 		columnWidth: 50,
 		itemSelector: '.grid-item',
 		horizontalOrder: false,
-		gutter: 0,
-		// fitWidth: true
+		gutter: 0
 	});
 	console.log("masonry: ", msnry);
 
