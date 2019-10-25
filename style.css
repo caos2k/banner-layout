@@ -13,12 +13,22 @@ body {
     display: block;
 }
 
-.grid{
+.filterSortingOptions{
     position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
 }
 
-.white{
-    background-color: #FFFFFF;
+.headerSmall{
+    height: 50px;
+    line-height: 50px;
+}
+
+.grid{
+    position: absolute;
+    top: 150px;
 }
 
 .grid-item{
@@ -41,15 +51,25 @@ body {
     border: 1px solid black;
     box-sizing: border-box;
     background: url("ams.gif") #efefef center no-repeat;
-    background-size: 30%;
+    background-size: 85px auto;
     left: 50%;
     transform: translate(-50%, 0);
 }
 
 .infoBox{
-    height: 50px;
-    /*line-height: 25px;*/
-    line-height: 50px;
+    height: 25px;
+    line-height: 25px;
+    position: relative;
+    bottom: 0;
+    left: -1px;
+    text-align: center;
+    font-family: Roboto, Helvetica, sans-serif;
+    font-size: 15px;
+}
+
+.additionalInfoBox{
+    height: 25px;
+    line-height: 25px;
     position: relative;
     bottom: 0;
     left: -1px;
@@ -118,6 +138,6 @@ body {
     background-color: #795548CC;
 }
 
-
-
-
+.white{
+    background-color: #FFFFFF;
+}
