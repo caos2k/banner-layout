@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function(e){
 		bannerArray[i].querySelector(".infoBox").style.width = closest50Width + 50 + "px";
 		bannerArray[i].style.width = closest50Width + 50 + "px";
 		bannerArray[i].style.height = closest50Height + 100 + "px";
-		bannerArray[i].classList += " " + sizeText;
+		bannerArray[i].classList += " size_" + sizeText;
 
 		// var randomColorPosition = Math.floor(Math.random() * colorsArray.length);
 		// var randomColor = colorsArray[randomColorPosition];
@@ -51,15 +51,15 @@ document.addEventListener("DOMContentLoaded", function(e){
 		areasArray.push(object);
 	}
 
-	// areasArray.sort(function(a, b) {
-	// 	return a.area === b.area
-	// 		? 0
-	// 		: (a.area > b.area ? 1 : -1);
-	// });
-	//
-	// for (i = 0; i < areasArray.length; ++i) {
-	// 	document.querySelector(".grid").appendChild(areasArray[i].element);
-	// }
+	areasArray.sort(function(a, b) {
+		return a.area === b.area
+			? 0
+			: (a.area > b.area ? 1 : -1);
+	});
+
+	for (i = 0; i < areasArray.length; ++i) {
+		document.querySelector(".grid").appendChild(areasArray[i].element);
+	}
 
 	// var msnry = new Masonry( '.grid', {
 	// 	columnWidth: 50,
@@ -101,36 +101,24 @@ function hideBanners(type) {
 }
 
 function filterType() {
-	var checkBoxesArray = document.querySelectorAll(".typeCheckbox");
 	var toShowString = "";
+	var typeCheckBoxesArray = document.querySelectorAll(".typeCheckbox");
 
-	for (var i = 0; i < checkBoxesArray.length; i++){
-		if(checkBoxesArray[i].checked){
-			toShowString += "." + checkBoxesArray[i].id + ", ";
+	var sizeCheckBoxesArray = document.querySelectorAll(".sizeCheckbox");
+	for (var i = 0; i < sizeCheckBoxesArray.length; i++){
+		if(sizeCheckBoxesArray[i].checked){
+			toShowString += "." + sizeCheckBoxesArray[i].id;
+			for (var j = 0; j < typeCheckBoxesArray.length; j++){
+				if(typeCheckBoxesArray[j].checked){
+					toShowString += "." + typeCheckBoxesArray[j].id + ", ";
+				}
+			}
 		}
 	}
 
-	if (toShowString.length > 0){
-		window.iso.arrange({
-			filter: toShowString.replace(/,\s*$/, "")
-		})
-	}
-	else {
-		window.iso.arrange({
-			filter: "none"
-		})
-	}
-}
 
-function filterSize() {
-	var checkBoxesArray = document.querySelectorAll(".typeCheckbox");
-	var toShowString = "";
 
-	for (var i = 0; i < checkBoxesArray.length; i++){
-		if(checkBoxesArray[i].checked){
-			toShowString += "." + checkBoxesArray[i].id + ", ";
-		}
-	}
+	console.log("toShowString: ", toShowString);
 
 	if (toShowString.length > 0){
 		window.iso.arrange({
@@ -145,15 +133,9 @@ function filterSize() {
 }
 
 function addEventListeners() {
-	document.querySelectorAll('.typeCheckbox').forEach(item => {
-		item.addEventListener('change', function(event) {
+	document.querySelectorAll('.typeCheckbox, .sizeCheckbox').forEach(item => {
+		item.addEventListener('change', function() {
 			filterType();
-		})
-	});
-
-	document.querySelectorAll('.typeCheckbox').forEach(item => {
-		item.addEventListener('change', function(event) {
-			filterSize();
 		})
 	});
 }
