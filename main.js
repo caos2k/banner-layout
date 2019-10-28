@@ -2,14 +2,14 @@ document.addEventListener("DOMContentLoaded", function(e){
 
 	// var colorsArray = ["red", "blue", "lightblue", "cyan", "teal", "green", "lightgreen", "lime", "yellow", "amber", "orange", "pink", "purple", "indigo", "brown"];
 
-	var typesArray = ["TypeA", "TypeB", "TypeC", "TypeD", "TypeE"];
+	var typesArray = ["Awareness", "Interest", "Consideration", "Engagement", "Conversion"];
 	for (var i = 0; i < typesArray.length; i++){
 		var html = '<label><input type="checkbox" name="type" class="typeCheckbox" checked id="' + typesArray[i] + '"> ' + typesArray[i] + ' </label>';
 		document.querySelector(".typesCheckboxes").querySelector(".labelContainer").innerHTML += html;
 	}
 
 	var dimensionsArray = ["300x250", "970x250", "300x50", "300x100", "320x50", "320x100", "300x600", "160x600", "120x600", "320x480", "480x320", "300x150", "728x90"];
-	var bannerNumber = 50;
+	var bannerNumber = 11;
 	var bannerShowedArray = [];
 
 	for (var j = 0; j < bannerNumber; j++){
@@ -102,31 +102,18 @@ document.addEventListener("DOMContentLoaded", function(e){
 
 function filterType() {
 	var toShowString = "";
-	var typeCheckBoxesArray = document.querySelectorAll(".typeCheckbox");
-	var sizeCheckBoxesArray = document.querySelectorAll(".sizeCheckbox");
+	var typeCheckBoxesArray = document.querySelectorAll(".typeCheckbox:checked");
+	var sizeCheckBoxesArray = document.querySelectorAll(".sizeCheckbox:checked");
 
 	for (var i = 0; i < sizeCheckBoxesArray.length; i++){
-		if(sizeCheckBoxesArray[i].checked){
-			for (var j = 0; j < typeCheckBoxesArray.length; j++){
-				if(typeCheckBoxesArray[j].checked){
-					toShowString += ".size_" + sizeCheckBoxesArray[i].id + "." + typeCheckBoxesArray[j].id + ", ";
-				}
-			}
+		for (var j = 0; j < typeCheckBoxesArray.length; j++){
+			toShowString += ".size_" + sizeCheckBoxesArray[i].id + "." + typeCheckBoxesArray[j].id + ", ";
 		}
 	}
 
-	// console.log("toShowString: ", toShowString);
-
-	if (toShowString.length > 0){
-		window.iso.arrange({
-			filter: toShowString.replace(/,\s*$/, "")
-		})
-	}
-	else {
-		window.iso.arrange({
-			filter: "none"
-		})
-	}
+	window.iso.arrange({
+		filter: toShowString.replace(/,\s*$/, "")
+	})
 }
 
 function addEventListeners() {
