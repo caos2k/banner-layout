@@ -1,15 +1,34 @@
 document.addEventListener("DOMContentLoaded", function(e){
 
-	var bannerArray = document.querySelectorAll(".grid-item");
-	var areasArray = [];
-
 	// var colorsArray = ["red", "blue", "lightblue", "cyan", "teal", "green", "lightgreen", "lime", "yellow", "amber", "orange", "pink", "purple", "indigo", "brown"];
+
 	var typesArray = ["TypeA", "TypeB", "TypeC", "TypeD", "TypeE"];
 	for (var i = 0; i < typesArray.length; i++){
-		var html = '<label><input type="checkbox" name="size" class="typeCheckbox" checked id="' + typesArray[i] + '"> ' + typesArray[i] + ' </label>';
-		document.querySelector(".typesCheckboxes").innerHTML += html;
+		var html = '<label><input type="checkbox" name="type" class="typeCheckbox" checked id="' + typesArray[i] + '"> ' + typesArray[i] + ' </label>';
+		document.querySelector(".typesCheckboxes").querySelector(".labelContainer").innerHTML += html;
 	}
 
+	var dimensionsArray = ["300x250", "970x250", "300x50", "300x100", "320x50", "320x100", "300x600", "160x600", "120x600", "320x480", "480x320", "300x150", "728x90"];
+	var bannerNumber = 50;
+	var bannerShowedArray = [];
+
+	for (var j = 0; j < bannerNumber; j++){
+		var randomSizePosition = Math.floor(Math.random() * dimensionsArray.length);
+		var randomSize = dimensionsArray[randomSizePosition];
+		bannerShowedArray.push(dimensionsArray[randomSizePosition]);
+
+		var htmlBannerWrapper = '<div class="grid-item"><div class="wrapper"><div class="banner"></div><div class="infoBox">' + randomSize +'</div><div class="additionalInfoBox"></div></div></div>';
+		document.querySelector(".grid").innerHTML += htmlBannerWrapper;
+	}
+
+	var uniqueBannerShowedArray = [...new Set(bannerShowedArray)];
+	for (var l = 0; l < uniqueBannerShowedArray.length; l++){
+		var htmlCheckbox = '<label><input type="checkbox" name="size" class="sizeCheckbox" checked id="' + uniqueBannerShowedArray[l] + '"> ' + uniqueBannerShowedArray[l] + ' </label>';
+		document.querySelector(".sizesCheckboxes").querySelector(".labelContainer").innerHTML += htmlCheckbox;
+	}
+
+	var bannerArray = document.querySelectorAll(".grid-item");
+	var areasArray = [];
 	for (var i = 0; i < bannerArray.length; i++){
 		var sizeText = bannerArray[i].querySelector(".infoBox").innerHTML;
 		var width = Number(sizeText.split("x")[0]);
@@ -51,15 +70,15 @@ document.addEventListener("DOMContentLoaded", function(e){
 		areasArray.push(object);
 	}
 
-	areasArray.sort(function(a, b) {
-		return a.area === b.area
-			? 0
-			: (a.area > b.area ? 1 : -1);
-	});
-
-	for (i = 0; i < areasArray.length; ++i) {
-		document.querySelector(".grid").appendChild(areasArray[i].element);
-	}
+	// areasArray.sort(function(a, b) {
+	// 	return a.area === b.area
+	// 		? 0
+	// 		: (a.area > b.area ? 1 : -1);
+	// });
+	//
+	// for (i = 0; i < areasArray.length; ++i) {
+	// 	document.querySelector(".grid").appendChild(areasArray[i].element);
+	// }
 
 	// var msnry = new Masonry( '.grid', {
 	// 	columnWidth: 50,
@@ -81,44 +100,22 @@ document.addEventListener("DOMContentLoaded", function(e){
 
 });
 
-
-function showBanners(type) {
-	window.iso.arrange({
-		filter: function( itemElem ) {
-			var bannerType = itemElem.querySelector('.infoBox').innerText;
-			return bannerType == type ? 1 : 0;
-		}
-	});
-}
-
-function hideBanners(type) {
-	window.iso.arrange({
-		filter: function( itemElem ) {
-			var bannerType = itemElem.querySelector('.additionalInfoBox').innerText;
-			return bannerType == type ? 0 : 1;
-		}
-	});
-}
-
 function filterType() {
 	var toShowString = "";
 	var typeCheckBoxesArray = document.querySelectorAll(".typeCheckbox");
-
 	var sizeCheckBoxesArray = document.querySelectorAll(".sizeCheckbox");
+
 	for (var i = 0; i < sizeCheckBoxesArray.length; i++){
 		if(sizeCheckBoxesArray[i].checked){
-			toShowString += "." + sizeCheckBoxesArray[i].id;
 			for (var j = 0; j < typeCheckBoxesArray.length; j++){
 				if(typeCheckBoxesArray[j].checked){
-					toShowString += "." + typeCheckBoxesArray[j].id + ", ";
+					toShowString += ".size_" + sizeCheckBoxesArray[i].id + "." + typeCheckBoxesArray[j].id + ", ";
 				}
 			}
 		}
 	}
 
-
-
-	console.log("toShowString: ", toShowString);
+	// console.log("toShowString: ", toShowString);
 
 	if (toShowString.length > 0){
 		window.iso.arrange({
