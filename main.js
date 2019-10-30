@@ -7,21 +7,6 @@ document.addEventListener("DOMContentLoaded", function(e){
 		horizontal: false,
 	});
 
-	// var msnry = new Masonry( '.grid', {
-	// 	columnWidth: 50,
-	// 	itemSelector: '.grid-item',
-	// 	horizontalOrder: false,
-	// 	gutter: 0
-	// });
-
-	// window.iso = new Isotope( '.grid', {
-	// 	masonry: {
-	// 		columnWidth: 50,
-	// 		horizontalOrder: false,
-	// 		gutter: 0
-	// 	}
-	// });
-
 	var typesArray = ["Awareness", "Interest", "Consideration", "Engagement", "Conversion"];
 	for (var i = 0; i < typesArray.length; i++){
 		var html = '<label><input type="checkbox" name="type" class="typeCheckbox" checked id="' + typesArray[i] + '"> ' + typesArray[i] + ' </label>';
@@ -29,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function(e){
 	}
 
 	var dimensionsArray = ["300x250", "970x250", "300x50", "300x100", "320x50", "320x100", "300x600", "160x600", "120x600", "320x480", "480x320", "300x150", "728x90"];
-	var bannerNumber = 11;
+	var bannerNumber = 50;
 	var bannerShowedArray = [];
 
 	for (var j = 0; j < bannerNumber; j++){
@@ -105,6 +90,22 @@ document.addEventListener("DOMContentLoaded", function(e){
 	// 	document.querySelector(".grid").appendChild(areasArray[i].element);
 	// }
 
+
+	// var msnry = new Masonry( '.grid', {
+	// 	columnWidth: 50,
+	// 	itemSelector: '.grid-item',
+	// 	horizontalOrder: false,
+	// 	gutter: 0
+	// });
+
+	window.iso = new Isotope( '.grid', {
+		masonry: {
+			columnWidth: 50,
+			horizontalOrder: false,
+			gutter: 0
+		}
+	});
+
 	pckry.layout();
 	addEventListeners();
 
@@ -129,6 +130,7 @@ function filterType() {
 function addEventListeners() {
 	document.querySelectorAll('.typeCheckbox, .sizeCheckbox').forEach(item => {
 		item.addEventListener('change', function() {
+			console.log("change");
 			filterType();
 		})
 	});
