@@ -1,6 +1,26 @@
 document.addEventListener("DOMContentLoaded", function(e){
 
-	// var colorsArray = ["red", "blue", "lightblue", "cyan", "teal", "green", "lightgreen", "lime", "yellow", "amber", "orange", "pink", "purple", "indigo", "brown"];
+	var pckry = new Packery( '.grid', {
+		itemSelector: '.grid-item',
+		columnWidth: 50,
+		rowHeight: 50,
+		horizontal: false,
+	});
+
+	// var msnry = new Masonry( '.grid', {
+	// 	columnWidth: 50,
+	// 	itemSelector: '.grid-item',
+	// 	horizontalOrder: false,
+	// 	gutter: 0
+	// });
+
+	// window.iso = new Isotope( '.grid', {
+	// 	masonry: {
+	// 		columnWidth: 50,
+	// 		horizontalOrder: false,
+	// 		gutter: 0
+	// 	}
+	// });
 
 	var typesArray = ["Awareness", "Interest", "Consideration", "Engagement", "Conversion"];
 	for (var i = 0; i < typesArray.length; i++){
@@ -30,6 +50,11 @@ document.addEventListener("DOMContentLoaded", function(e){
 	var bannerArray = document.querySelectorAll(".grid-item");
 	var areasArray = [];
 	for (var i = 0; i < bannerArray.length; i++){
+
+		pckry.appended(bannerArray[i]);
+		var draggie = new Draggabilly(bannerArray[i]);
+		pckry.bindDraggabillyEvents(draggie);
+
 		var sizeText = bannerArray[i].querySelector(".infoBox").innerHTML;
 		var width = Number(sizeText.split("x")[0]);
 		var height = Number(sizeText.split("x")[1]);
@@ -62,12 +87,12 @@ document.addEventListener("DOMContentLoaded", function(e){
 		// bannerArray[i].querySelector(".additionalInfoBox").innerHTML = area + " blocks - " + randomType;
 			// + "<br/><strong>Blocks:</strong> " + horizontalBlocks + "x" + verticalBlocks + " &#10687; <strong>Area:</strong> " + area;
 
-		var object = {
-			element: bannerArray[i],
-			area: area
-		};
-
-		areasArray.push(object);
+		// var object = {
+		// 	element: bannerArray[i],
+		// 	area: area
+		// };
+		//
+		// areasArray.push(object);
 	}
 
 	// areasArray.sort(function(a, b) {
@@ -80,22 +105,7 @@ document.addEventListener("DOMContentLoaded", function(e){
 	// 	document.querySelector(".grid").appendChild(areasArray[i].element);
 	// }
 
-	// var msnry = new Masonry( '.grid', {
-	// 	columnWidth: 50,
-	// 	itemSelector: '.grid-item',
-	// 	horizontalOrder: false,
-	// 	gutter: 0
-	// });
-
-	window.iso = new Isotope( '.grid', {
-		itemSelector: '.grid-item',
-		masonry: {
-			columnWidth: 50,
-			horizontalOrder: false,
-			gutter: 0
-		}
-	});
-
+	pckry.layout();
 	addEventListeners();
 
 });
