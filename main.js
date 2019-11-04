@@ -7,14 +7,14 @@ document.addEventListener("DOMContentLoaded", function(e){
 		horizontal: false,
 	});
 
-	var typesArray = ["Awareness", "Interest", "Consideration", "Engagement", "Conversion"];
+	var typesArray = ["Connect", "Catch", "Close"];
 	for (var i = 0; i < typesArray.length; i++){
 		var html = '<label><input type="checkbox" name="type" class="typeCheckbox" checked id="' + typesArray[i] + '"> ' + typesArray[i] + ' </label>';
 		document.querySelector(".typesCheckboxes").querySelector(".labelContainer").innerHTML += html;
 	}
 
 	var dimensionsArray = ["300x250", "970x250", "300x50", "300x100", "320x50", "320x100", "300x600", "160x600", "120x600", "320x480", "480x320", "300x150", "728x90"];
-	var bannerNumber = 50;
+	var bannerNumber = 3;
 	var bannerShowedArray = [];
 
 	for (var j = 0; j < bannerNumber; j++){
@@ -113,24 +113,42 @@ document.addEventListener("DOMContentLoaded", function(e){
 
 function filterType() {
 	var toShowString = "";
-	var typeCheckBoxesArray = document.querySelectorAll(".typeCheckbox:checked");
 	var sizeCheckBoxesArray = document.querySelectorAll(".sizeCheckbox:checked");
+	var typeCheckBoxesArray = document.querySelectorAll(".typeCheckbox:checked");
 
-	for (var i = 0; i < sizeCheckBoxesArray.length; i++){
-		for (var j = 0; j < typeCheckBoxesArray.length; j++){
-			toShowString += ".size_" + sizeCheckBoxesArray[i].id + "." + typeCheckBoxesArray[j].id + ", ";
-		}
+	if (sizeCheckBoxesArray.length === 0){
+		document.querySelector(".errorLogs").innerHTML = "At least 1 size is needed to show something!";
+		document.querySelector(".grid").style.display = 'none';
 	}
 
-	window.iso.arrange({
-		filter: toShowString.replace(/,\s*$/, "")
-	})
+	else if (typeCheckBoxesArray.length === 0){
+		document.querySelector(".errorLogs").innerHTML = "At least 1 type is needed to show something!";
+		document.querySelector(".grid").style.display = 'none';
+	}
+
+	else{
+		document.querySelector(".errorLogs").innerHTML = "";
+		document.querySelector(".grid").style.display = 'block';
+		for (var i = 0; i < sizeCheckBoxesArray.length; i++){
+			for (var j = 0; j < typeCheckBoxesArray.length; j++){
+				toShowString += ".size_" + sizeCheckBoxesArray[i].id + "." + typeCheckBoxesArray[j].id + ", ";
+			}
+		}
+
+		window.iso.arrange({
+			filter: toShowString.replace(/,\s*$/, "")
+		});
+
+		if(window.iso.filteredItems.length === 0){
+			document.querySelector(".errorLogs").innerHTML = "No combination available for your selection!";
+			document.querySelector(".grid").style.display = 'none';
+		}
+	}
 }
 
 function addEventListeners() {
 	document.querySelectorAll('.typeCheckbox, .sizeCheckbox').forEach(item => {
 		item.addEventListener('change', function() {
-			console.log("change");
 			filterType();
 		})
 	});

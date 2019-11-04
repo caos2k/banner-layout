@@ -13,6 +13,24 @@ body {
     display: block;
 }
 
+.errorLogsContainer{
+    position: fixed;
+    width: 500px;
+    height: 150px;
+    top: 0;
+    right: 0;
+}
+
+.errorLogs{
+    position: absolute;
+    width: 500px;
+    height: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 35px;
+    text-align: center;
+}
+
 .filterSortingOptions{
     position: absolute;
     top: 0;
