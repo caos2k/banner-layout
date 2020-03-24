@@ -1,0 +1,13 @@
+{
+  "settings": {
+    "entry": {
+      "js": "./script/main.js",
+      "html": "./index.html"
+    },
+    "size": {
+      "width": 728,
+      "height": 90
+    }
+  },
+  "content": {}
+}

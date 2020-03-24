@@ -3,8 +3,7 @@ document.addEventListener("DOMContentLoaded", function(e){
 	var pckry = new Packery( '.grid', {
 		itemSelector: '.grid-item',
 		columnWidth: 50,
-		rowHeight: 50,
-		horizontal: false,
+		rowHeight: 50
 	});
 
 	var typesArray = ["Connect", "Catch", "Close"];
@@ -14,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function(e){
 	}
 
 	var dimensionsArray = ["300x250", "970x250", "300x50", "300x100", "320x50", "320x100", "300x600", "160x600", "120x600", "320x480", "480x320", "300x150", "728x90"];
-	var bannerNumber = 3;
+	var bannerNumber = 19;
 	var bannerShowedArray = [];
 
 	for (var j = 0; j < bannerNumber; j++){
@@ -33,12 +32,9 @@ document.addEventListener("DOMContentLoaded", function(e){
 	}
 
 	var bannerArray = document.querySelectorAll(".grid-item");
-	var areasArray = [];
 	for (var i = 0; i < bannerArray.length; i++){
 
 		pckry.appended(bannerArray[i]);
-		var draggie = new Draggabilly(bannerArray[i]);
-		pckry.bindDraggabillyEvents(draggie);
 
 		var sizeText = bannerArray[i].querySelector(".infoBox").innerHTML;
 		var width = Number(sizeText.split("x")[0]);
@@ -55,48 +51,11 @@ document.addEventListener("DOMContentLoaded", function(e){
 		bannerArray[i].style.height = closest50Height + 100 + "px";
 		bannerArray[i].classList += " size_" + sizeText;
 
-		// var randomColorPosition = Math.floor(Math.random() * colorsArray.length);
-		// var randomColor = colorsArray[randomColorPosition];
-		// colorsArray.splice(randomColorPosition, 1);
-	 	// bannerArray[i].classList.add("white");
-		// bannerArray[i].classList.add(randomColor);
-
 		var randomTypePosition = Math.floor(Math.random() * typesArray.length);
 		var randomType = typesArray[randomTypePosition];
 		bannerArray[i].classList.add(randomType);
-
-		var horizontalBlocks = bannerArray[i].offsetWidth / 50;
-		var verticalBlocks = bannerArray[i].offsetHeight / 50;
-		var area = horizontalBlocks * verticalBlocks;
 		bannerArray[i].querySelector(".additionalInfoBox").innerHTML = randomType;
-		// bannerArray[i].querySelector(".additionalInfoBox").innerHTML = area + " blocks - " + randomType;
-			// + "<br/><strong>Blocks:</strong> " + horizontalBlocks + "x" + verticalBlocks + " &#10687; <strong>Area:</strong> " + area;
-
-		// var object = {
-		// 	element: bannerArray[i],
-		// 	area: area
-		// };
-		//
-		// areasArray.push(object);
 	}
-
-	// areasArray.sort(function(a, b) {
-	// 	return a.area === b.area
-	// 		? 0
-	// 		: (a.area > b.area ? 1 : -1);
-	// });
-	//
-	// for (i = 0; i < areasArray.length; ++i) {
-	// 	document.querySelector(".grid").appendChild(areasArray[i].element);
-	// }
-
-
-	// var msnry = new Masonry( '.grid', {
-	// 	columnWidth: 50,
-	// 	itemSelector: '.grid-item',
-	// 	horizontalOrder: false,
-	// 	gutter: 0
-	// });
 
 	window.iso = new Isotope( '.grid', {
 		masonry: {
